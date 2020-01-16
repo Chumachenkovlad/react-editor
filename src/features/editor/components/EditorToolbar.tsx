@@ -13,7 +13,6 @@ export default function EditorToolbar({
   editor,
   selectedWord
 }: Props): ReactElement {
-  console.log(selectedWord);
   const { formattings } = getState(selectedWord);
 
   function getState(

@@ -50,18 +50,16 @@ export default class Editor extends React.Component<
     const { property, style, value } = formatting;
 
     if (property) {
-      set(element, property, value);
+      element.setAttribute(property, value as string);
     }
 
     if (style) {
-      set(element, style, value);
+      set(element.style, style, value);
     }
 
     const prevFormattings = formattings.filter(
       ({ key }) => key !== formatting.key
     );
-
-    console.log(formatting);
 
     this.setState({
       selectedWord: {
