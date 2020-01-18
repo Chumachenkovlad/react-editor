@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Nillable, EditableWord, Formatting } from "../models";
 import { FORMATTINGS } from "../formattings";
 import { getWordValue } from "../utils";
@@ -6,42 +5,18 @@ import { set } from "lodash";
 import EditorTextarea from "./EditorTextarea";
 import EditorToolbar from "./EditorToolbar";
 
-export interface IEditorProps {}
+import React, { ReactElement, useState } from "react";
 
 export interface IEditorState {
   selectedWord: Nillable<EditableWord>;
 }
 
-const initialState: IEditorState = { selectedWord: null };
+export default function Editor(): ReactElement {
+  const [selectedWord, setSelectedWord] = useState<Nillable<EditableWord>>(
+    null
+  );
 
-export default class Editor extends React.Component<
-  IEditorProps,
-  IEditorState
-> {
-  constructor(props: IEditorProps) {
-    super(props);
-
-    this.state = initialState;
-  }
-
-  selectWord(element: HTMLElement) {
-    const formattings = FORMATTINGS.map(formatting => {
-      const value = getWordValue(element, formatting);
-      return { ...formatting, value };
-    });
-
-    this.setState({
-      selectedWord: { element, formattings }
-    });
-  }
-
-  unselectWord() {
-    this.setState(initialState);
-  }
-
-  changeFormatting(formatting: Formatting) {
-    const { selectedWord } = this.state;
-
+  function changeWordFormatting(formatting: Formatting) {
     if (!selectedWord) {
       return;
     }
@@ -61,20 +36,28 @@ export default class Editor extends React.Component<
       ({ key }) => key !== formatting.key
     );
 
-    this.setState({
-      selectedWord: {
-        formattings: [...prevFormattings, formatting],
-        element
-      }
+    setSelectedWord({
+      formattings: [...prevFormattings, formatting],
+      element
     });
   }
 
-  public render() {
-    return (
-      <div>
-        <EditorToolbar editor={this} selectedWord={this.state.selectedWord} />
-        <EditorTextarea editor={this} />
-      </div>
-    );
+  function selectWord(element: HTMLElement) {
+    const formattings = FORMATTINGS.map(formatting => {
+      const value = getWordValue(element, formatting);
+      return { ...formatting, value };
+    });
+
+    setSelectedWord({ element, formattings });
   }
+
+  return (
+    <div>
+      <EditorToolbar
+        changeWordFormatting={changeWordFormatting}
+        selectedWord={selectedWord}
+      />
+      <EditorTextarea selectWord={selectWord} />
+    </div>
+  );
 }

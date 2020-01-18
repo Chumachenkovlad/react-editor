@@ -3,14 +3,12 @@ import { get } from "lodash";
 import { EDITABLE_CLASS } from "../constants";
 
 export interface IEditorTextareaProps {
-  editor: {
-    selectWord(el: HTMLElement): void;
-  };
+  selectWord(el: HTMLElement): void;
 }
 
-export default function EditorTextarea({
-  editor
-}: IEditorTextareaProps): React.ReactElement {
+export default function EditorTextarea(
+  props: IEditorTextareaProps
+): React.ReactElement {
   function selectWord() {
     const selection = window.getSelection();
 
@@ -21,13 +19,13 @@ export default function EditorTextarea({
     const parent = get(selection, "anchorNode.parentElement") as HTMLElement;
 
     if (parent.classList.contains(EDITABLE_CLASS)) {
-      editor.selectWord(parent);
+      props.selectWord(parent);
     } else {
       const range = selection.getRangeAt(0);
       const container = document.createElement("span");
       container.classList.add(EDITABLE_CLASS);
       range.surroundContents(container);
-      editor.selectWord(container);
+      props.selectWord(container);
     }
   }
 

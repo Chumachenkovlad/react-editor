@@ -1,48 +1,29 @@
 import React, { ReactElement } from "react";
 import { Formatting, EditableWord, Nillable } from "../models";
-import { isNil, sortBy, get } from "lodash";
+import { FORMATTINGS, isTogglerFormatting } from "../formattings";
 
 interface Props {
-  editor: {
-    changeFormatting(formatting: Formatting): void;
-  };
+  changeWordFormatting(formatting: Formatting): void;
   selectedWord: Nillable<EditableWord>;
 }
 
 export default function EditorToolbar({
-  editor,
+  changeWordFormatting,
   selectedWord
 }: Props): ReactElement {
-  const { formattings } = getState(selectedWord);
+  const formattings = selectedWord?.formattings || FORMATTINGS;
 
-  function getState(
-    selectedWord: Nillable<EditableWord>
-  ): { word: string; formattings: Formatting[] } {
-    if (isNil(selectedWord)) {
-      return { word: "", formattings: [] };
-    }
+  const togglingFormattings = formattings.filter(isTogglerFormatting);
 
-    const formattings = sortBy(
-      selectedWord.formattings.filter(f => f.type === "toggler"),
-      "key"
-    );
+  const toggleFormatting = (formatting: Formatting) => () =>
+    changeWordFormatting({
+      ...formatting,
+      value: formatting.value ? "" : formatting.appliedValue
+    });
 
-    const word = get(selectedWord.element, "innerText");
-
-    return { formattings, word };
-  }
-
-  function toggleFormatting(formatting: Formatting) {
-    return function() {
-      editor.changeFormatting({
-        ...formatting,
-        value: formatting.value ? "" : formatting.appliedValue
-      });
-    };
-  }
   return (
     <div>
-      {formattings.map(formatting => {
+      {togglingFormattings.map(formatting => {
         return (
           <button key={formatting.key} onClick={toggleFormatting(formatting)}>
             {formatting.icon}

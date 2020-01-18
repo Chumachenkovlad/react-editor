@@ -46,3 +46,11 @@ export const FORMATTINGS: Formatting[] = [
     type: "widget"
   }
 ];
+
+export enum FormattingTypes {
+  Widget = "widget",
+  Toggler = "toggler"
+}
+
+export const isTogglerFormatting = ({ type }: Formatting) =>
+  type === FormattingTypes.Toggler;
