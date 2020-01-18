@@ -52,7 +52,7 @@ export default function Editor(): ReactElement {
   }
 
   return (
-    <div>
+    <div className="Editor">
       <EditorToolbar
         changeWordFormatting={changeWordFormatting}
         selectedWord={selectedWord}

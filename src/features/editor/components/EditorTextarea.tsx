@@ -30,7 +30,7 @@ export default function EditorTextarea(
   }
 
   return (
-    <div contentEditable onDoubleClick={selectWord}>
+    <div className="EditorTextarea" contentEditable onDoubleClick={selectWord}>
       Subjectivity is very important when considering privacy because we are
       seeing diverse levels of tolerance towards what is considered acceptable
       and what are privacy infringements. Some may claim that privacy is dead,
