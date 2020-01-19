@@ -1,17 +1,24 @@
 import { Nillable, EditableWord, Formatting } from "../models";
 import { FORMATTINGS } from "../formattings";
-import { getWordValue } from "../utils";
-import { set } from "lodash";
+import { get } from "lodash";
 import EditorTextarea from "./EditorTextarea";
 import EditorToolbar from "./EditorToolbar";
 
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useState, useRef } from "react";
+import { createStorage } from "../services/storage";
+import { DEFAULT_CONTENT } from "./default-content";
+import { applyFormatting } from "../utils";
 
 export interface IEditorState {
   selectedWord: Nillable<EditableWord>;
 }
 
+const storage = createStorage("editor-storage", DEFAULT_CONTENT);
+const initialHtml = { __html: storage.getItem() };
+
 export default function Editor(): ReactElement {
+  const textareaRef = useRef<HTMLDivElement>(null);
+
   const [selectedWord, setSelectedWord] = useState<Nillable<EditableWord>>(
     null
   );
@@ -22,15 +29,8 @@ export default function Editor(): ReactElement {
     }
 
     const { element, formattings } = selectedWord;
-    const { property, style, value } = formatting;
 
-    if (property) {
-      element.setAttribute(property, value as string);
-    }
-
-    if (style) {
-      set(element.style, style, value);
-    }
+    applyFormatting(element, formatting);
 
     const prevFormattings = formattings.filter(
       ({ key }) => key !== formatting.key
@@ -40,11 +40,15 @@ export default function Editor(): ReactElement {
       formattings: [...prevFormattings, formatting],
       element
     });
+
+    if (textareaRef.current) {
+      storage.setItem(textareaRef.current.innerHTML);
+    }
   }
 
   function selectWord(element: HTMLElement) {
     const formattings = FORMATTINGS.map(formatting => {
-      const value = getWordValue(element, formatting);
+      const value = get(element, formatting.prop);
       return { ...formatting, value };
     });
 
@@ -57,7 +61,15 @@ export default function Editor(): ReactElement {
         changeWordFormatting={changeWordFormatting}
         selectedWord={selectedWord}
       />
-      <EditorTextarea selectWord={selectWord} />
+      <div>
+        <EditorTextarea selectWord={selectWord}>
+          <div
+            className="EditorTextarea-container"
+            ref={textareaRef}
+            dangerouslySetInnerHTML={initialHtml}
+          ></div>
+        </EditorTextarea>
+      </div>
     </div>
   );
 }

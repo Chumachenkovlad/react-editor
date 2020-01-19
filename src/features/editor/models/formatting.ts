@@ -1,11 +1,18 @@
+import { EditorWidgets } from "../components/widgets/widget.model";
+
 export interface Formatting {
-  key?: string;
-  property?: string; // 'style.fontWeight',
-  style?: string;
+  key: string;
+  prop: string;
+  description: string;
   value?: string;
   appliedValue?: string;
-  type?: FormattingType;
+  type: FormattingTypes;
   icon?: string;
+  widgetType?: EditorWidgets;
+  label?: string;
 }
 
-export type FormattingType = 'toggler' | 'widget';
+export enum FormattingTypes {
+  Widget = "widget",
+  Toggler = "toggler"
+}

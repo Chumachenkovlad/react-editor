@@ -1,56 +1,64 @@
-import { Formatting } from "./models";
+import { Formatting, FormattingTypes } from "./models";
+import { EditorWidgets } from "./components/widgets/widget.model";
 
 export const FORMATTINGS: Formatting[] = [
   {
     key: "bold",
     icon: "format_bold",
-    style: "fontWeight",
-    value: "",
+    prop: "style.fontWeight",
     appliedValue: "bold",
-    type: "toggler"
+    type: FormattingTypes.Toggler,
+    description: "Bold"
   },
   {
     key: "italic",
     icon: "format_italic",
-    style: "fontStyle",
-    value: "",
+    prop: "style.fontStyle",
     appliedValue: "italic",
-    type: "toggler"
+    type: FormattingTypes.Toggler,
+    description: "Italic"
   },
   {
     key: "underlined",
     icon: "format_underlined",
-    style: "textDecoration",
-    value: "",
+    prop: "style.textDecoration",
     appliedValue: "underline",
-    type: "toggler"
+    type: FormattingTypes.Toggler,
+    description: "Underlined"
   },
   {
     key: "background",
-    style: "background",
-    value: "",
-    type: "widget"
+    prop: "style.background",
+    icon: "color_lens",
+    type: FormattingTypes.Widget,
+    widgetType: EditorWidgets.ColorPicker,
+    description: "Change Background Color"
   },
   {
     key: "color",
-    style: "color",
-    value: "",
-    type: "widget"
+    prop: "style.color",
+    icon: "text_format",
+    type: FormattingTypes.Widget,
+    widgetType: EditorWidgets.ColorPicker,
+    description: "Change Font Color"
   },
   {
     key: "synonym",
     icon: "edit",
-    property: "innerText",
-    value: "",
-    appliedValue: "underlined",
-    type: "widget"
+    prop: "innerText",
+    type: FormattingTypes.Widget,
+    widgetType: EditorWidgets.SynonymsPicker,
+    description: "Pick synonym from list"
+  },
+  {
+    key: "fontSize",
+    icon: "format_size",
+    prop: "style.fontSize",
+    type: FormattingTypes.Widget,
+    widgetType: EditorWidgets.Input,
+    description: "Change Font Size (10px, 1em, etc)"
   }
-];
-
-export enum FormattingTypes {
-  Widget = "widget",
-  Toggler = "toggler"
-}
+].map((formattings, index) => ({ ...formattings, index, value: "" }));
 
 export const isTogglerFormatting = ({ type }: Formatting) =>
   type === FormattingTypes.Toggler;

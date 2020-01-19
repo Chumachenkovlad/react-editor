@@ -1,13 +1,23 @@
-import { get } from "lodash";
-import { Formatting } from "./models";
+import { Formatting } from "./models/formatting";
+import { set } from "lodash";
 
-export function getWordValue(
+export const isEnterKeyEvent = <T extends KeyboardEvent>(event: T): boolean => {
+  return event.key === "Enter";
+};
+
+export const isEscKeyEvent = <T extends KeyboardEvent>(event: T): boolean => {
+  return event.key === "Esc";
+};
+
+export function applyFormatting(
   element: HTMLElement,
-  formatting: Formatting
-): string {
-  const { property, style } = formatting;
-  if (property) {
-    return get(element, property);
+  { prop, value }: Formatting
+) {
+  const [property, style] = prop.split(".");
+
+  if (style) {
+    return set(element.style, style, value);
   }
-  return get(element, `style.${style}`);
+
+  set(element, property, value);
 }

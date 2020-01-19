@@ -1,44 +1,55 @@
 import * as React from "react";
-import { get } from "lodash";
+import { get, debounce } from "lodash";
 import { EDITABLE_CLASS } from "../constants";
+import { findOuterEditableNode } from "./findOuterEditableNode";
 
 export interface IEditorTextareaProps {
   selectWord(el: HTMLElement): void;
+  children: JSX.Element;
 }
 
 export default function EditorTextarea(
   props: IEditorTextareaProps
 ): React.ReactElement {
-  function selectWord() {
+  const selectWord = debounce(function() {
     const selection = window.getSelection();
 
-    if (selection === null) {
+    if (!selection) {
       return;
     }
 
-    const parent = get(selection, "anchorNode.parentElement") as HTMLElement;
+    const parent = findOuterEditableNode(
+      get(selection, "anchorNode.parentNode") as HTMLElement
+    );
+
+    if (!parent) {
+      return;
+    }
 
     if (parent.classList.contains(EDITABLE_CLASS)) {
-      props.selectWord(parent);
-    } else {
-      const range = selection.getRangeAt(0);
-      const container = document.createElement("span");
-      container.classList.add(EDITABLE_CLASS);
-      range.surroundContents(container);
-      props.selectWord(container);
+      return props.selectWord(parent);
     }
-  }
+
+    const range = selection.getRangeAt(0);
+    const container = document.createElement("span");
+    container.classList.add(EDITABLE_CLASS);
+    range.surroundContents(container);
+
+    if (container.innerText) {
+      return props.selectWord(container);
+    }
+
+    container.remove();
+  }, 150);
 
   return (
-    <div className="EditorTextarea" contentEditable onDoubleClick={selectWord}>
-      Subjectivity is very important when considering privacy because we are
-      seeing diverse levels of tolerance towards what is considered acceptable
-      and what are privacy infringements. Some may claim that privacy is dead,
-      or as Mark Zuckerburg said in 2010 that ‘Privacy was no longer a social
-      norm.’ Although to be fair Mark Zuckerberg he did also say in a Times
-      interview also in 2010 that “What people want isn’t complete privacy. It
-      isn’t that they want secrecy. It’s that they want control over what they
-      share and what they don’t.
+    <div
+      className="EditorTextarea"
+      suppressContentEditableWarning={true}
+      contentEditable
+      onMouseUp={selectWord}
+    >
+      {props.children}
     </div>
   );
 }
