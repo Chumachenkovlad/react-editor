@@ -24,6 +24,7 @@
 }
 
 .App-content {
+  padding: 16px;
   flex: 1 1 auto;
   display: flex;
   flex-flow: row wrap;
@@ -41,6 +42,7 @@
   min-height: 200px;
   overflow: auto;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .Editor {
