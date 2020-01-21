@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Editor from "./features/editor/components/Editor";
+import Editor from "./shared/Editor/components/Editor";
 
 const App: React.FC = () => {
   return (

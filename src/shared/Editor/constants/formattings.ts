@@ -1,5 +1,5 @@
-import { Formatting, FormattingTypes } from "./models";
-import { EditorWidgets } from "./components/widgets/widget.model";
+import { Formatting, FormattingTypes } from "../models";
+import { EditorWidgets } from "../components/widgets/widget.model";
 
 export const FORMATTINGS: Formatting[] = [
   {

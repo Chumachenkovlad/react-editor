@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from "react";
 import { EditorWidgetProps } from "./widget.model";
 import Button from "@material-ui/core/Button";
-import { getSynonyms } from "../../services/synonyms";
+import { getSynonyms } from "../../../api/synonyms";
 interface Props extends EditorWidgetProps {}
 
 export function SynonymsPickerWidget({

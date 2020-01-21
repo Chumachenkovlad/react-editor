@@ -1,17 +1,19 @@
 import * as React from "react";
 import { get, debounce } from "lodash";
-import { EDITABLE_CLASS } from "../constants";
-import { findOuterEditableNode } from "./findOuterEditableNode";
+import { EDITABLE_CLASS } from "../constants/constants";
+import { findOuterEditableNode } from '../helpers/find-outer-editable-node.func';
 
 export interface IEditorTextareaProps {
   selectWord(el: HTMLElement): void;
   children: JSX.Element;
 }
 
+const SELECTION_DEBOUNCE = 150;
+
 export default function EditorTextarea(
   props: IEditorTextareaProps
 ): React.ReactElement {
-  const selectWord = debounce(function() {
+  function selectWord() {
     const selection = window.getSelection();
 
     if (!selection) {
@@ -40,14 +42,16 @@ export default function EditorTextarea(
     }
 
     container.remove();
-  }, 150);
+  };
+
+  const debouncedSelectWord = debounce(selectWord, SELECTION_DEBOUNCE)
 
   return (
     <div
       className="EditorTextarea"
       suppressContentEditableWarning={true}
       contentEditable
-      onMouseUp={selectWord}
+      onMouseUp={debouncedSelectWord}
     >
       {props.children}
     </div>

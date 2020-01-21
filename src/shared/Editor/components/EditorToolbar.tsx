@@ -1,6 +1,5 @@
 import React, { ReactElement, useState } from "react";
 import { Formatting, EditableWord, Nillable } from "../models";
-import { FORMATTINGS, isTogglerFormatting } from "../formattings";
 import Icon from "@material-ui/core/Icon";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -9,6 +8,7 @@ import EditorToolbarDialog from "./EditorToolbarDialog";
 import Tooltip from "@material-ui/core/Tooltip";
 import { EditorWidget } from "./widgets/widget.model";
 import { EditorWidgetFactory } from "./widgets/EditorWidgetFactory";
+import { isTogglerFormatting, FORMATTINGS } from "../constants/formattings";
 
 const oppositeValue = ({ value, appliedValue }: Formatting) =>
   value ? "" : appliedValue || "";
@@ -23,6 +23,12 @@ interface Props {
   changeWordFormatting(formatting: Formatting): void;
   selectedWord: Nillable<EditableWord>;
 }
+
+const ToolbarButtonContent = ({ icon, label }: Partial<Formatting>): ReactElement => icon ? (
+  <Icon>{icon}</Icon>
+) : (
+    <span>{label}</span>
+  )
 
 export default function EditorToolbar({
   changeWordFormatting,
@@ -65,21 +71,19 @@ export default function EditorToolbar({
 
   const closeDialog = () => setOpen(false);
 
+
   return (
     <div className="EditorToolbar">
       <ButtonGroup variant="text" size="small">
         {formattings.map(formatting => {
+          const { key, icon, label, description } = formatting;
           return (
-            <Tooltip key={formatting.key} title={formatting.description}>
+            <Tooltip key={key} title={description}>
               <Button
                 variant={getButtonVariantByFormatting(formatting)}
                 onClick={toggleFormatting(formatting)}
               >
-                {formatting.icon ? (
-                  <Icon>{formatting.icon}</Icon>
-                ) : (
-                  <span>{formatting.label}</span>
-                )}
+                <ToolbarButtonContent icon={icon} label={label} />
               </Button>
             </Tooltip>
           );

@@ -1,5 +1,8 @@
-import { TEXTAREA_CONTAINER_CLASS, EDITABLE_CLASS } from "../constants";
 import { Nillable } from "../models";
+import {
+  TEXTAREA_CONTAINER_CLASS,
+  EDITABLE_CLASS
+} from "../constants/constants";
 
 export function findOuterEditableNode(
   element: HTMLElement,

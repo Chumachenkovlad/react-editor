@@ -1,9 +1,9 @@
 import React, { ReactElement, useRef } from "react";
 import { EditorWidgetProps } from "./widget.model";
-import { isEnterKeyEvent } from "../../utils";
 import TextField from "@material-ui/core/TextField";
+import { isEnterKeyEvent } from 'shared/utils/event-keys';
 
-interface Props extends EditorWidgetProps {}
+interface Props extends EditorWidgetProps { }
 
 export function InputWidget({
   selectedValue,

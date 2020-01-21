@@ -1,13 +1,14 @@
 import { Nillable, EditableWord, Formatting } from "../models";
-import { FORMATTINGS } from "../formattings";
 import { get } from "lodash";
 import EditorTextarea from "./EditorTextarea";
 import EditorToolbar from "./EditorToolbar";
 
 import React, { ReactElement, useState, useRef } from "react";
-import { createStorage } from "../services/storage";
-import { DEFAULT_CONTENT } from "./default-content";
-import { applyFormatting } from "../utils";
+import { createStorage } from "../../api/storage";
+import { DEFAULT_CONTENT } from "../constants/default-content";
+import { FORMATTINGS } from "../constants/formattings";
+import { applyFormatting } from '../helpers/apply-formatting.func';
+
 
 export interface IEditorState {
   selectedWord: Nillable<EditableWord>;
@@ -18,7 +19,6 @@ const initialHtml = { __html: storage.getItem() };
 
 export default function Editor(): ReactElement {
   const textareaRef = useRef<HTMLDivElement>(null);
-
   const [selectedWord, setSelectedWord] = useState<Nillable<EditableWord>>(
     null
   );
