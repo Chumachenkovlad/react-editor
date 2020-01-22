@@ -4,6 +4,9 @@ import { ConnectedEditor } from 'shared/Editor';
 import { getContent, updateContent } from 'shared/api/content';
 
 const App: React.FC = () => {
+  /* 
+    Could be moved in separate feature/view
+  */
   const htmlContent = getContent();
   return (
     <div className="App">

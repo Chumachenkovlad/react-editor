@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Editor> should be rendered 1`] = `
+<div>
+  <div
+    class="Editor"
+  >
+    <div
+      class="EditorToolbar"
+    >
+      <div
+        class="MuiButtonGroup-root"
+        role="group"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedText MuiButtonGroup-groupedTextHorizontal MuiButtonGroup-groupedText MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+          tabindex="0"
+          title="Bold"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              aria-hidden="true"
+              class="material-icons MuiIcon-root"
+            >
+              format_bold
+            </span>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedText MuiButtonGroup-groupedTextHorizontal MuiButtonGroup-groupedText MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+          tabindex="0"
+          title="Italic"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              aria-hidden="true"
+              class="material-icons MuiIcon-root"
+            >
+              format_italic
+            </span>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedText MuiButtonGroup-groupedTextHorizontal MuiButtonGroup-groupedText MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+          tabindex="0"
+          title="Underlined"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              aria-hidden="true"
+              class="material-icons MuiIcon-root"
+            >
+              format_underlined
+            </span>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedText MuiButtonGroup-groupedTextHorizontal MuiButtonGroup-groupedText MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+          tabindex="0"
+          title="Change Background Color"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              aria-hidden="true"
+              class="material-icons MuiIcon-root"
+            >
+              color_lens
+            </span>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedText MuiButtonGroup-groupedTextHorizontal MuiButtonGroup-groupedText MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+          tabindex="0"
+          title="Change Font Color"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              aria-hidden="true"
+              class="material-icons MuiIcon-root"
+            >
+              text_format
+            </span>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedText MuiButtonGroup-groupedTextHorizontal MuiButtonGroup-groupedText MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+          tabindex="0"
+          title="Pick synonym from list"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              aria-hidden="true"
+              class="material-icons MuiIcon-root"
+            >
+              edit
+            </span>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedText MuiButtonGroup-groupedTextHorizontal MuiButtonGroup-groupedText MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+          tabindex="0"
+          title="Change Font Size (10px, 1em, etc)"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              aria-hidden="true"
+              class="material-icons MuiIcon-root"
+            >
+              format_size
+            </span>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+    <div>
+      <div
+        class="EditorTextarea"
+        contenteditable="true"
+      >
+        <div
+          class="EditorTextarea-container"
+        >
+          some text
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

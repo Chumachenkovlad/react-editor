@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EditorTextarea> should be defined 1`] = `
+<div>
+  <div
+    class="EditorTextarea"
+    contenteditable="true"
+  >
+    <div>
+      some extra text
+    </div>
+  </div>
+</div>
+`;
