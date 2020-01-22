@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Editor from "./shared/Editor/components/Editor";
+import { ConnectedEditor } from 'shared/Editor';
 
 const App: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ const App: React.FC = () => {
         <h2 className="App-subtitle">React test task</h2>
       </header>
       <section className="App-content">
-        <Editor />
+        <ConnectedEditor />
       </section>
     </div>
   );

@@ -17,13 +17,13 @@ const initialState: EditorWordState = {
 export const reducer = (state: EditorWordState = initialState, action: any) => getReducerFunc(reducerFunctionsMap, action.type)(state, action)
 
 
+
 const defaultReducersFunc = (state: any, action: any) => state;
 
 type ReducerFunc<S = any, A = any> = (state: S, action: A) => S;
 
 function getReducerFunc(reducersMap: Dictionary<ReducerFunc>, type: string): ReducerFunc {
     return reducersMap[type] || defaultReducersFunc
-} {
 }
 
 const reducerFunctionsMap: Record<WordsActionsTypes, ReducerFunc<EditorWordState>> = {

@@ -1,2 +1,3 @@
 export { reducer as editorWordsReducer } from './reducer';
-export { WordsActions } from './actions';
+export { wordsActions } from './actions';
+export { editorWordSelectors } from './selectors';

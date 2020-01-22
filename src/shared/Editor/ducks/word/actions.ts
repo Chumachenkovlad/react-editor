@@ -19,7 +19,7 @@ const selectWord = (payload: {
     payload
 })
 
-export const WordsActions = {
+export const wordsActions = {
     updateFormatting,
     selectWord
 }
